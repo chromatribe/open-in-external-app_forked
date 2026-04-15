@@ -4,6 +4,8 @@
 
     "msg.error.configFormat": "你的插件配置格式不正确！",
     "msg.error.sameTitleMultipleApp": "不允许配置多个应用使用同一个标题，请先修复配置！",
+    "msg.warn.untrustedWorkspaceShellCommand": "在未受信任的工作区中已禁止执行 shellCommand。请先信任此工作区后再执行 shellCommand。",
+    "msg.action.manageWorkspaceTrust": "管理工作区信任",
     "msg.quickPick.selectApp.placeholder": "选择打开文件的应用...",
     "msg.quickPick.selectApps.placeholder": "选择打开文件的多个应用...",
 

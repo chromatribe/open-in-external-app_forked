@@ -5,6 +5,7 @@ import { promisify } from 'node:util';
 import type { Options as OpenOptions } from 'open';
 import _open from 'open';
 import vscode, { Uri } from 'vscode';
+import { localize } from 'vscode-nls-i18n';
 import { wslToWindows } from 'wsl-path';
 
 import { logger } from './logger';
@@ -60,6 +61,22 @@ async function openByBuiltinApi(filePath: string) {
     );
 }
 
+async function guardShellCommandExecution() {
+    if (vscode.workspace.isTrusted) {
+        return true;
+    }
+
+    const manageTrust = localize('msg.action.manageWorkspaceTrust');
+    const selection = await vscode.window.showWarningMessage(
+        localize('msg.warn.untrustedWorkspaceShellCommand'),
+        manageTrust,
+    );
+    if (selection === manageTrust) {
+        await vscode.commands.executeCommand('workbench.trust.manage');
+    }
+    return false;
+}
+
 export async function open(filePath: string, appConfig?: string | ExternalAppConfig) {
     logger.info(`opened file is: "${filePath}"`);
     try {
@@ -89,6 +106,9 @@ export async function open(filePath: string, appConfig?: string | ExternalAppCon
             if (appConfig.isElectronApp) {
                 await openByBuiltinApi(convertedPath);
             } else if (appConfig.shellCommand) {
+                if (!(await guardShellCommandExecution())) {
+                    return;
+                }
                 const parsedCommand = (
                     await parseVariables([appConfig.shellCommand!], Uri.file(convertedPath))
                 )[0];
