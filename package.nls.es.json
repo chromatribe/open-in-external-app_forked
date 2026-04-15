@@ -1,0 +1,30 @@
+{
+    "cmd.open": "Abrir en aplicación externa",
+    "cmd.openMultiple": "Abrir en múltiples aplicaciones externas",
+
+    "msg.error.configFormat": "¡El formato de configuración de la extensión no es correcto!",
+    "msg.error.sameTitleMultipleApp": "¡No está permitido configurar dos aplicaciones con el mismo título. Por favor, corrija su configuración primero!",
+    "msg.warn.untrustedWorkspaceShellCommand": "La ejecución de shellCommand está bloqueada en espacios de trabajo no confiables. Confíe en este espacio de trabajo para habilitar la ejecución de shellCommand.",
+    "msg.action.manageWorkspaceTrust": "Administrar confianza del espacio de trabajo",
+    "msg.quickPick.selectApp.placeholder": "Seleccionar aplicación para abrir el archivo...",
+    "msg.quickPick.selectApps.placeholder": "Seleccionar múltiples aplicaciones para abrir el archivo...",
+
+    "cfg.openInExternalApp.openMapper": "Asignación entre la extensión de archivo y la aplicación para abrirlo",
+    "cfg.openInExternalApp.openMapper.item.id": "Combinar con el argumento de atajo (configItemId) para personalizar el atajo de un elemento de configuración específico",
+    "cfg.openInExternalApp.openMapper.item.autoOpenOnFileOpen": "Abrir automáticamente los archivos coincidentes en una aplicación externa cuando el archivo se abre en VS Code",
+    "cfg.openInExternalApp.openMapper.item.extensionName.string": "Extensión de archivo, por ejemplo: md",
+    "cfg.openInExternalApp.openMapper.item.extensionName.array": "Pasar un array de cadenas para coincidir con múltiples extensiones",
+    "cfg.openInExternalApp.openMapper.item.apps": "Aplicaciones externas para abrir el archivo",
+    "cfg.openInExternalApp.openMapper.item.apps.string": "Comando accesible desde el shell o ruta absoluta al programa ejecutable",
+    "cfg.openInExternalApp.openMapper.item.apps.array": "Información sobre las aplicaciones externas",
+    "cfg.openInExternalApp.openMapper.item.apps.item.title": "Título que se mostrará en la lista desplegable si hay varias aplicaciones disponibles",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellCommand": "Usar comando shell con marcador de posición de archivo para procesar el archivo",
+    "cfg.openInExternalApp.openMapper.item.apps.item.args": "Argumentos pasados a openCommand",
+    "cfg.openInExternalApp.openMapper.item.apps.item.isElectronApp": "Establecer en true cuando se configura una aplicación Electron",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv": "Variables de entorno adicionales para shellCommand",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.string": "Variable de entorno",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.windows": "Variables de entorno adicionales para shellCommand en Windows",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.linux": "Variables de entorno adicionales para shellCommand en Linux",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.osx": "Variables de entorno adicionales para shellCommand en macOS",
+    "cfg.openInExternalApp.openMapper.item.apps.item.wslConvertWindowsPath": "Si se debe convertir la ruta WSL a ruta Windows en modo remoto WSL. El valor predeterminado es true (convertir a ruta Windows). Establecer en false para mantener la ruta nativa WSL para aplicaciones WSL como evince."
+}

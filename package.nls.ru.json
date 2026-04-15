@@ -4,6 +4,8 @@
 
     "msg.error.configFormat": "Не верный формат конфигурации расширения!",
     "msg.error.sameTitleMultipleApp": "Недопустимо задавать два приложения, используя один и тот же title, пожалуйста, исправьте конфигурацию!",
+    "msg.warn.untrustedWorkspaceShellCommand": "Выполнение shellCommand заблокировано в ненадёжных рабочих пространствах. Разрешите это рабочее пространство, чтобы включить выполнение shellCommand.",
+    "msg.action.manageWorkspaceTrust": "Управление доверием рабочего пространства",
     "msg.quickPick.selectApp.placeholder": "Выберете приложение, чтобы открыть файл...",
     "msg.quickPick.selectApps.placeholder": "Выберете группу приложений, чтобы открыть файл...",
 
@@ -24,5 +26,5 @@
     "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.windows": "Дополнительные переменные окружения для shellCommand, для Windows",
     "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.linux": "Дополнительные переменные окружения для shellCommand, для Linux",
     "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.osx": "Дополнительные переменные окружения для shellCommand, для macOS",
-    "cfg.openInExternalApp.openMapper.item.apps.item.wslConvertWindowsPath": "Whether to convert WSL path to Windows path when running in WSL remote mode. Default is true (convert to Windows path for Windows applications). Set to false to keep WSL native path for WSL applications like evince"
+    "cfg.openInExternalApp.openMapper.item.apps.item.wslConvertWindowsPath": "Преобразовывать ли путь WSL в путь Windows в режиме WSL remote. По умолчанию true (конвертировать в путь Windows для Windows-приложений). Установите false, чтобы сохранить нативный путь WSL для WSL-приложений, таких как evince."
 }

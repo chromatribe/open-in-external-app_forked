@@ -1,0 +1,30 @@
+{
+    "cmd.open": "In externer App öffnen",
+    "cmd.openMultiple": "In mehreren externen Apps öffnen",
+
+    "msg.error.configFormat": "Das Format der Erweiterungskonfiguration ist nicht korrekt!",
+    "msg.error.sameTitleMultipleApp": "Es ist nicht erlaubt, zwei Anwendungen mit demselben Titel zu konfigurieren. Bitte korrigieren Sie zuerst Ihre Konfiguration!",
+    "msg.warn.untrustedWorkspaceShellCommand": "Die Ausführung von shellCommand ist in nicht vertrauenswürdigen Arbeitsbereichen blockiert. Vertrauen Sie diesem Arbeitsbereich, um die Ausführung zu aktivieren.",
+    "msg.action.manageWorkspaceTrust": "Arbeitsbereich-Vertrauen verwalten",
+    "msg.quickPick.selectApp.placeholder": "Anwendung zum Öffnen der Datei auswählen...",
+    "msg.quickPick.selectApps.placeholder": "Mehrere Anwendungen zum Öffnen der Datei auswählen...",
+
+    "cfg.openInExternalApp.openMapper": "Zuordnung zwischen Dateiendung und der zu verwendenden Anwendung",
+    "cfg.openInExternalApp.openMapper.item.id": "Kombinieren Sie dies mit dem Tastenkürzel-Argument (configItemId), um ein benutzerdefiniertes Kürzel für ein bestimmtes Konfigurationselement festzulegen",
+    "cfg.openInExternalApp.openMapper.item.autoOpenOnFileOpen": "Passende Dateien automatisch in einer externen App öffnen, wenn die Datei in VS Code geöffnet wird",
+    "cfg.openInExternalApp.openMapper.item.extensionName.string": "Dateiendung, zum Beispiel: md",
+    "cfg.openInExternalApp.openMapper.item.extensionName.array": "String-Array übergeben, um mehrere Dateiendungen abzugleichen",
+    "cfg.openInExternalApp.openMapper.item.apps": "Externe Anwendungen zum Öffnen der Datei",
+    "cfg.openInExternalApp.openMapper.item.apps.string": "Befehl, der über die Shell zugänglich ist, oder absoluter Pfad zum ausführbaren Programm",
+    "cfg.openInExternalApp.openMapper.item.apps.array": "Informationen zur externen Anwendung",
+    "cfg.openInExternalApp.openMapper.item.apps.item.title": "Titel, der in der Dropdown-Liste angezeigt wird, wenn mehrere Apps zum Öffnen der Datei vorhanden sind",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellCommand": "Shell-Befehl mit Datei-Platzhalter zur Verarbeitung der Datei verwenden",
+    "cfg.openInExternalApp.openMapper.item.apps.item.args": "Argumente, die an openCommand übergeben werden",
+    "cfg.openInExternalApp.openMapper.item.apps.item.isElectronApp": "Auf true setzen, wenn Sie eine Electron-App konfigurieren",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv": "Zusätzliche Umgebungsvariablen für shellCommand",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.string": "Umgebungsvariable",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.windows": "Zusätzliche Umgebungsvariablen für shellCommand unter Windows",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.linux": "Zusätzliche Umgebungsvariablen für shellCommand unter Linux",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.osx": "Zusätzliche Umgebungsvariablen für shellCommand unter macOS",
+    "cfg.openInExternalApp.openMapper.item.apps.item.wslConvertWindowsPath": "Ob der WSL-Pfad im WSL-Remote-Modus in einen Windows-Pfad umgewandelt werden soll. Standard ist true (für Windows-Anwendungen). Auf false setzen, um den nativen WSL-Pfad für WSL-Anwendungen wie evince beizubehalten."
+}

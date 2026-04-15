@@ -1,3 +1,22 @@
+## Fork v0.11.3-fork.1 (2026-04-15)
+
+> Changes by [chromatribe](https://github.com/chromatribe) — localization and versioning.
+
+### 🌐 Localization
+
+- Add UI localization for 5 new languages: Japanese (`ja`), German (`de`), French (`fr`), Spanish (`es`), Korean (`ko`)
+- Complete missing keys in existing locales: Portuguese Brazil (`pt-br`), Russian (`ru`), Traditional Chinese (`zh-tw`)
+- All 10 supported locales now have full key parity
+
+### 🔖 Versioning
+
+- Adopt fork versioning scheme: `<upstream-base>-fork.<n>` (e.g. `0.11.3-fork.1`)
+  - Upstream patch follow-up: increment `x` in `0.11.x-fork.y`
+  - Fork-only new feature: increment `minor` (e.g. `0.12.0-fork.1`)
+  - Fork revision on same upstream: increment `fork.y`
+
+---
+
 ## Fork v0.11.2 (2026-04-15)
 
 > Changes by [chromatribe](https://github.com/chromatribe) on top of upstream v0.11.2.

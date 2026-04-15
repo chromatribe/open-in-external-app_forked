@@ -1,0 +1,30 @@
+{
+    "cmd.open": "外部アプリで開く",
+    "cmd.openMultiple": "複数の外部アプリで開く",
+
+    "msg.error.configFormat": "拡張機能の設定フォーマットが正しくありません！",
+    "msg.error.sameTitleMultipleApp": "同じタイトルを持つアプリを複数設定することはできません。設定を修正してください！",
+    "msg.warn.untrustedWorkspaceShellCommand": "shellCommand は信頼されていないワークスペースでは実行できません。shellCommand を使用するにはワークスペースを信頼してください。",
+    "msg.action.manageWorkspaceTrust": "ワークスペースの信頼を管理",
+    "msg.quickPick.selectApp.placeholder": "ファイルを開くアプリを選択...",
+    "msg.quickPick.selectApps.placeholder": "ファイルを開く複数のアプリを選択...",
+
+    "cfg.openInExternalApp.openMapper": "ファイルの拡張子と使用する外部アプリのマッピング",
+    "cfg.openInExternalApp.openMapper.item.id": "ショートカットキーの configItemId と組み合わせて、特定の設定項目にショートカットを割り当てます",
+    "cfg.openInExternalApp.openMapper.item.autoOpenOnFileOpen": "VS Code でファイルを開いたとき、一致するファイルを自動的に外部アプリで開きます",
+    "cfg.openInExternalApp.openMapper.item.extensionName.string": "ファイルの拡張子（例: md）",
+    "cfg.openInExternalApp.openMapper.item.extensionName.array": "複数の拡張子にマッチさせるには文字列の配列を渡します",
+    "cfg.openInExternalApp.openMapper.item.apps": "ファイルを開く外部アプリ",
+    "cfg.openInExternalApp.openMapper.item.apps.string": "シェルからアクセスできるコマンドまたは実行ファイルの絶対パス",
+    "cfg.openInExternalApp.openMapper.item.apps.array": "外部アプリの情報",
+    "cfg.openInExternalApp.openMapper.item.apps.item.title": "複数のアプリがある場合にドロップダウンリストに表示されるタイトル",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellCommand": "ファイルのプレースホルダーを含むシェルコマンドを使用してファイルを処理します",
+    "cfg.openInExternalApp.openMapper.item.apps.item.args": "openCommand に渡す引数",
+    "cfg.openInExternalApp.openMapper.item.apps.item.isElectronApp": "Electron アプリを設定する場合は true に設定します",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv": "shellCommand の追加環境変数",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.string": "環境変数",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.windows": "Windows 向け shellCommand の追加環境変数",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.linux": "Linux 向け shellCommand の追加環境変数",
+    "cfg.openInExternalApp.openMapper.item.apps.item.shellEnv.osx": "macOS 向け shellCommand の追加環境変数",
+    "cfg.openInExternalApp.openMapper.item.apps.item.wslConvertWindowsPath": "WSL リモートモードで WSL パスを Windows パスに変換するかどうか。デフォルトは true（Windows アプリ向けに Windows パスへ変換）。evince などの WSL アプリには false に設定して WSL ネイティブパスを維持してください"
+}
