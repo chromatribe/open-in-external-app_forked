@@ -76,10 +76,27 @@ async function openWithConfigItem(
                 canPickMany: true,
                 placeHolder: localize('msg.quickPick.selectApps.placeholder'),
             });
-            if (selectedTitles) {
-                selectedTitles.forEach(async (title) => {
-                    await open(filePath, candidateApps.find((app) => app.title === title)!);
-                });
+            if (selectedTitles?.length) {
+                const selectedApps = selectedTitles
+                    .map((title) => candidateApps.find((app) => app.title === title))
+                    .filter((app): app is ExternalAppConfig => app !== undefined);
+                const openResults = await Promise.allSettled(
+                    selectedApps.map((app) => open(filePath, app)),
+                );
+                const failedResults = openResults.flatMap((result, index) =>
+                    result.status === 'rejected'
+                        ? [{ appTitle: selectedApps[index].title, reason: result.reason }]
+                        : [],
+                );
+                if (failedResults.length > 0) {
+                    vscode.window.showErrorMessage(
+                        `Failed to open ${failedResults.length} app(s). Check logs for details.`,
+                    );
+                    failedResults.forEach(({ appTitle, reason }) => {
+                        logger.info(`openMultiple failed for app "${appTitle}":`);
+                        logger.info(reason);
+                    });
+                }
             }
         } else {
             const selectedTitle = await vscode.window.showQuickPick(pickerItems, {
