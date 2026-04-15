@@ -75,10 +75,16 @@ export async function parseVariables(strList: string[], activeFile?: Uri) {
         );
     }
 
+    const workspaceConfig = vscode.workspace.getConfiguration();
+    const configValueCache = new Map<string, unknown>();
     replacement.set(/\$\{env:(.*?)\}/g, (...captures) => process.env[captures[1]] ?? captures[0]);
-    replacement.set(/\$\{config:(.*?)\}/g, (...captures) =>
-        vscode.workspace.getConfiguration().get(captures[1], captures[0]),
-    );
+    replacement.set(/\$\{config:(.*?)\}/g, (...captures) => {
+        const key = captures[1];
+        if (!configValueCache.has(key)) {
+            configValueCache.set(key, workspaceConfig.get(key, captures[0]));
+        }
+        return String(configValueCache.get(key));
+    });
 
     const replacementEntries = [...replacement.entries()].filter(([_, r]) => r !== undefined);
     const replace = (str: string) => {

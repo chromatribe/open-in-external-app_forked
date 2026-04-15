@@ -6,7 +6,7 @@ let _isWindows = false;
 let _isMacintosh = false;
 let _isLinux = false;
 
-switch(process.platform) {
+switch (process.platform) {
     case 'win32':
         _isWindows = true;
         break;
@@ -23,50 +23,41 @@ export const isMacintosh = _isMacintosh;
 export const isLinux = _isLinux;
 
 export function getShellEnv(): NodeJS.ProcessEnv {
-    return { ...process.env};
+    return { ...process.env };
 }
 
-export async function mergeEnvironments(parent: NodeJS.ProcessEnv, other: NodeJS.ProcessEnv | undefined, activeFile?: Uri) {
-	if (!other) {
-		return;
-	}
+export async function mergeEnvironments(
+    parent: NodeJS.ProcessEnv,
+    other: NodeJS.ProcessEnv | undefined,
+    activeFile?: Uri,
+) {
+    if (!other) {
+        return;
+    }
 
-    if (isWindows) {
-        // In Windows, environment variables are not case sensitive, so
-        // this must be taken into account when overwriting.
-		await Promise.all(Object.entries(other).map(
-            async ([key, value]) => {
-                if (value !== undefined) {
-                    let otherKey = key;
-                    for (const envKey in parent) {
-                        if (key.toLowerCase() === envKey.toLowerCase()) {
-                            otherKey = envKey;
-                            break;
-                        }
-                    }
+    const entries = Object.entries(other).filter(([, value]) => value !== undefined);
+    const stringValues = entries
+        .map(([, value]) => value)
+        .filter((value): value is string => typeof value === 'string');
+    const parsedStringValues = await parseVariables([...stringValues], activeFile);
+    let parsedStringIndex = 0;
 
-                    await _mergeEnvironmentValue(parent, otherKey, value, activeFile);
-                }
-            }
-        ));
-    } else {
-		await Promise.all(Object.entries(other).map(
-            async ([key, value]) => {
-                if (value !== undefined) {
-                    await _mergeEnvironmentValue(parent, key, value, activeFile);
-                }
-            }
-        ));
+    for (const [key, value] of entries) {
+        const mergedKey = isWindows ? resolveWindowsEnvironmentKey(parent, key) : key;
+        if (typeof value === 'string') {
+            parent[mergedKey] = parsedStringValues[parsedStringIndex++];
+        } else {
+            delete parent[mergedKey];
+        }
     }
 }
 
-async function _mergeEnvironmentValue(env: NodeJS.ProcessEnv, key: string, value: string | null, activeFile?: Uri) : Promise<void> {
-	if (typeof value === 'string') {
-		const parsedValue = (
-                await parseVariables([value], activeFile)
-        )[0];
-        env[key] = parsedValue;
-	} else {
-		delete env[key];
-	}
+function resolveWindowsEnvironmentKey(env: NodeJS.ProcessEnv, key: string): string {
+    // In Windows, environment variables are case-insensitive.
+    for (const envKey in env) {
+        if (key.toLowerCase() === envKey.toLowerCase()) {
+            return envKey;
+        }
+    }
+    return key;
 }
