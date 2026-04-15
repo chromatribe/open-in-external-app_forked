@@ -36,6 +36,7 @@ Improvements added in this fork on top of v0.11.2:
 - **Config variable cache**: `${config:...}` lookups inside `parseVariables()` are cached per call to avoid redundant `getConfiguration().get()` calls
 - **`autoOpenOnFileOpen`**: new per-extension option — set `true` to automatically launch the external app whenever the file is opened in VS Code
 - **Japanese documentation**: Japanese setup guide added to this README
+- **Localization**: UI strings now translated into 10 languages — English, Japanese (`ja`), German (`de`), French (`fr`), Spanish (`es`), Korean (`ko`), Simplified Chinese (`zh-cn`), Traditional Chinese (`zh-tw`), Portuguese Brazil (`pt-br`), Russian (`ru`)
 
 ## 💡 Motivation
 
@@ -47,7 +48,7 @@ But, with this extension, you can do it more simply. Just right click to the fil
 
 This fork is not published to the VS Code Marketplace. Install it manually from the VSIX file.
 
-1. Download `open-in-external-app-0.11.2.vsix` from the [releases page](https://github.com/chromatribe/open-in-external-app_forked/releases) (or build it yourself — see below).
+1. Download `open-in-external-app-0.11.3-fork.1.vsix` from the [releases page](https://github.com/chromatribe/open-in-external-app_forked/releases) (or build it yourself — see below).
 2. Open VS Code / Cursor.
 3. Open the Extensions view (`Cmd+Shift+X`).
 4. Click `...` → **Install from VSIX...** and select the downloaded file.
