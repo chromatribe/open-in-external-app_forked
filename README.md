@@ -1,25 +1,65 @@
 <div align="center">
 
-# Open in External App
+# Open in External App (Fork)
 
 Open file with external application in VSCode.
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/YuTengjing.open-in-external-app)](https://marketplace.visualstudio.com/items/YuTengjing.open-in-external-app/changelog) [![Installs](https://img.shields.io/visual-studio-marketplace/i/YuTengjing.open-in-external-app)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.open-in-external-app) [![Downloads](https://img.shields.io/visual-studio-marketplace/d/YuTengjing.open-in-external-app)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.open-in-external-app) [![Rating Star](https://img.shields.io/visual-studio-marketplace/stars/YuTengjing.open-in-external-app)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.open-in-external-app&ssr=false#review-details) [![Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/YuTengjing.open-in-external-app)](https://github.com/tjx666/open-in-external-app)
+**This is a community fork of [open-in-external-app](https://github.com/tjx666/open-in-external-app) by [YuTengjing](https://github.com/tjx666).**
+
+Fork repository: [chromatribe/open-in-external-app_forked](https://github.com/chromatribe/open-in-external-app_forked)
 
 </div>
 
+## About This Fork
+
+「VS Code からファイルを外部アプリで開きたい」と考えていたところ、まったく同じ発想で先に開発・公開されていた [YuTengjing](https://github.com/tjx666) さんの存在を知りました。  
+素晴らしいベースを作ってくださったことに感謝しつつ、いくつかの改善を加えてフォーク版として公開しています。
+
+This fork was born out of the same idea — I wanted to open files in external apps from VS Code.  
+I found that [YuTengjing](https://github.com/tjx666) had already built exactly that.  
+With deep respect and gratitude for the original work, I'm maintaining this fork with additional improvements.
+
+- Original repository: [tjx666/open-in-external-app](https://github.com/tjx666/open-in-external-app)
+- Licensed under [MIT](LICENSE) — Copyright (c) 2022 YuTengjing
+- All existing configuration keys (`openInExternalApp.*`) are fully compatible with the original
+
+## Changes from Upstream
+
+Improvements added in this fork on top of v0.11.2:
+
+- **Robustness**: `forEach(async)` in `openMultiple` replaced with `Promise.allSettled` — failures are now collected and reported per app
+- **Timeout**: all external process calls (`exec`, `open` package, `vscode.env.openExternal`, WSL path conversion) are wrapped with a 15-second timeout
+- **Unified error handling**: every branch in `open()` is covered by a single `try/catch`, giving consistent error messages to users
+- **Config caching**: `getExtensionConfig()` now caches the Joi-validated result and invalidates only on `openInExternalApp.openMapper` changes, reducing per-command overhead
+- **Security**: `shellCommand` execution is blocked in untrusted workspaces, with a prompt to manage workspace trust
+- **Env var batch expansion**: `mergeEnvironments()` calls `parseVariables()` once for all env values instead of once per key
+- **Config variable cache**: `${config:...}` lookups inside `parseVariables()` are cached per call to avoid redundant `getConfiguration().get()` calls
+- **`autoOpenOnFileOpen`**: new per-extension option — set `true` to automatically launch the external app whenever the file is opened in VS Code
+- **Japanese documentation**: Japanese setup guide added to this README
+
 ## 💡 Motivation
 
-VSCode is a very excellent editor, but sometime I prefer to use external application to work with some files. For example, I like to use [typora](https://www.typora.io/) to edit the markdown files. Usually, I will right click to the file, and select `Reveal in File Explorer` , then open the file using external application.
+VSCode is a very excellent editor, but sometime I prefer to use external application to work with some files. For example, I like to use [typora](https://www.typora.io/) to edit the markdown files. Usually, I will right click to the file, and select `Reveal in File Explorer`, then open the file using external application.
 
 But, with this extension, you can do it more simply. Just right click to the file, and select `Open in External App`, that file would be opened by system default application. You can also use this way to open `.psd` files with photoshop, `.html` files with browser, and so on...
 
 ## 🔌 Installation
 
-1. Execute `Extensions: Install Extensions` command from [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
-2. Type `YuTengjing.open-in-external-app` into the search form and install.
+This fork is not published to the VS Code Marketplace. Install it manually from the VSIX file.
 
-Read the [extension installation guide](https://code.visualstudio.com/docs/editor/extension-gallery) for more details.
+1. Download `open-in-external-app-0.11.2.vsix` from the [releases page](https://github.com/chromatribe/open-in-external-app_forked/releases) (or build it yourself — see below).
+2. Open VS Code / Cursor.
+3. Open the Extensions view (`Cmd+Shift+X`).
+4. Click `...` → **Install from VSIX...** and select the downloaded file.
+
+### Build VSIX yourself
+
+```bash
+git clone https://github.com/chromatribe/open-in-external-app_forked.git
+cd open-in-external-app_forked
+npx pnpm install
+npx pnpm package
+```
 
 ## 🔧 Configuration
 
@@ -169,13 +209,7 @@ In VSCode, Right-clicking is different from right-clicking while holding `alt` k
 - `shellCommand` は**信頼されていないワークスペースでは実行されません**
 - その場合はワークスペースを Trusted にしてから実行してください
 
-### 5) よくあるハマりどころ
-
-- `title` は同じ `apps` 配列内で重複不可
-- Electronアプリを開くときは `isElectronApp: true` が必要な場合あり
-- WSL環境でWSLアプリを開く場合は `wslConvertWindowsPath: false` を設定
-
-### 6) ファイルを開いたときに自動で外部アプリを起動したい
+### 5) ファイルを開いたときに自動で外部アプリを起動したい
 
 各拡張子設定で `autoOpenOnFileOpen: true` を指定すると、VS Code でそのファイルを開いたタイミングで外部アプリも起動します。
 
@@ -196,7 +230,11 @@ In VSCode, Right-clicking is different from right-clicking while holding `alt` k
 }
 ```
 
-この README は Marketplace の拡張機能ページにも表示されるため、上の手順をそのまま参照して設定できます。
+### 6) よくあるハマりどころ
+
+- `title` は同じ `apps` 配列内で重複不可
+- Electronアプリを開くときは `isElectronApp: true` が必要な場合あり
+- WSL環境でWSLアプリを開く場合は `wslConvertWindowsPath: false` を設定
 
 ## :loudspeaker: Limits
 
@@ -404,19 +442,11 @@ However, if you want to open files with **WSL applications** (like `evince`, `xd
 }
 ```
 
-## My extensions
+## License
 
-- [Open in External App](https://github.com/tjx666/open-in-external-app)
-- [Package Manager Enhancer](https://github.com/tjx666/package-manager-enhancer)
-- [Neo File Utils](https://github.com/tjx666/vscode-neo-file-utils)
-- [Reload Can Solve Any Problems](https://github.com/tjx666/reload-can-solve-any-problems)
-- [VSCode FE Helper](https://github.com/tjx666/vscode-fe-helper)
-- [VSCode archive](https://github.com/tjx666/vscode-archive)
-- [Better Colorizer](https://github.com/tjx666/better-colorizer/tree/main)
-- [Modify File Warning](https://github.com/tjx666/modify-file-warning)
-- [Power Edit](https://github.com/tjx666/power-edit)
+MIT License — Copyright (c) 2022 [YuTengjing](https://github.com/tjx666)
 
-Check all here: [publishers/YuTengjing](https://marketplace.visualstudio.com/publishers/YuTengjing)
+Fork modifications are also released under the same [MIT License](LICENSE).
 
 ## 🧡 Backers
 

@@ -1,3 +1,34 @@
+## Fork v0.11.2 (2026-04-15)
+
+> Changes by [chromatribe](https://github.com/chromatribe) on top of upstream v0.11.2.
+
+### 🚀 Features
+
+- Add `autoOpenOnFileOpen` option per extension — automatically launch external app when file is opened ([95bf477](https://github.com/chromatribe/open-in-external-app_forked/commit/95bf477))
+
+### 🔒 Security
+
+- Block `shellCommand` execution in untrusted workspaces with a prompt to manage workspace trust ([3883da4](https://github.com/chromatribe/open-in-external-app_forked/commit/3883da4))
+
+### ⚡ Performance
+
+- Cache validated `openMapper` config; invalidate only on configuration change ([b3a4f5f](https://github.com/chromatribe/open-in-external-app_forked/commit/b3a4f5f))
+- Batch `parseVariables()` calls in `mergeEnvironments()` — one call for all env values instead of one per key ([31027e1](https://github.com/chromatribe/open-in-external-app_forked/commit/31027e1))
+- Cache `${config:...}` variable lookups within a single `parseVariables()` call ([31027e1](https://github.com/chromatribe/open-in-external-app_forked/commit/31027e1))
+
+### 🛡️ Robustness
+
+- Replace `forEach(async)` in `openMultiple` with `Promise.allSettled` — failures are collected and reported per app ([da021a3](https://github.com/chromatribe/open-in-external-app_forked/commit/da021a3))
+- Wrap all external process calls with a 15-second timeout (`exec`, `open` package, `vscode.env.openExternal`, WSL path conversion) ([7c12751](https://github.com/chromatribe/open-in-external-app_forked/commit/7c12751))
+- Unify error handling across all branches in `open()` with consistent user-facing messages ([da021a3](https://github.com/chromatribe/open-in-external-app_forked/commit/da021a3))
+
+### 📝 Documentation
+
+- Add Japanese configuration guide to README ([96f4102](https://github.com/chromatribe/open-in-external-app_forked/commit/96f4102))
+- Rewrite README to disclose fork origin and credit original author ([95bf477](https://github.com/chromatribe/open-in-external-app_forked/commit/95bf477))
+
+---
+
 ## v0.11.2 (2025-10-07)
 
 ### 🐞 Bug Fixes
