@@ -2,6 +2,7 @@ import vscode from 'vscode';
 import { init } from 'vscode-nls-i18n';
 
 import commands from './commands';
+import { clearExtensionConfigCache } from './config';
 import { logger } from './utils/logger';
 
 export function activate(context: vscode.ExtensionContext): void {
@@ -18,6 +19,14 @@ export function activate(context: vscode.ExtensionContext): void {
             vscode.commands.registerCommand(command.identifier!, command.handler),
         );
     });
+
+    context.subscriptions.push(
+        vscode.workspace.onDidChangeConfiguration((event) => {
+            if (event.affectsConfiguration('openInExternalApp.openMapper')) {
+                clearExtensionConfigCache();
+            }
+        }),
+    );
 }
 
 export function deactivate(): void {

@@ -2,6 +2,8 @@ import joi from 'joi';
 import vscode from 'vscode';
 import { localize } from 'vscode-nls-i18n';
 
+let cachedOpenMapper: ExtensionConfigItem[] | undefined;
+
 export function validateConfiguration(configuration: ExtensionConfigItem[]): joi.ValidationResult {
     const configScheme = joi.array().items(
         joi.object({
@@ -46,7 +48,15 @@ export function validateConfiguration(configuration: ExtensionConfigItem[]): joi
     return configScheme.validate(configuration);
 }
 
+export function clearExtensionConfigCache() {
+    cachedOpenMapper = undefined;
+}
+
 export default function getExtensionConfig(): ExtensionConfigItem[] {
+    if (cachedOpenMapper !== undefined) {
+        return cachedOpenMapper;
+    }
+
     const configuration: ExtensionConfigItem[] | undefined = vscode.workspace
         .getConfiguration()
         .get('openInExternalApp.openMapper');
@@ -56,11 +66,14 @@ export default function getExtensionConfig(): ExtensionConfigItem[] {
         if (result.error) {
             vscode.window.showErrorMessage(localize('msg.error.configFormat'));
             vscode.window.showErrorMessage(result.error.message);
+            cachedOpenMapper = [];
             return [];
         }
 
+        cachedOpenMapper = configuration;
         return configuration;
     }
 
+    cachedOpenMapper = [];
     return [];
 }
