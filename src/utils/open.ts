@@ -27,12 +27,12 @@ function formatError(error: unknown) {
     return String(error);
 }
 
-async function withTimeout<T>(promise: Promise<T>, timeoutMs: number, operationName: string) {
+async function withTimeout<T>(promise: PromiseLike<T>, timeoutMs: number, operationName: string) {
     let timeoutHandle: NodeJS.Timeout | undefined;
     try {
         return await Promise.race([
             promise,
-            new Promise<T>((_, reject) => {
+            new Promise<never>((_resolve, reject) => {
                 timeoutHandle = setTimeout(() => {
                     reject(new Error(`${operationName} timed out after ${timeoutMs}ms`));
                 }, timeoutMs);
@@ -143,13 +143,19 @@ export async function open(filePath: string, appConfig?: string | ExternalAppCon
             `Failed to open file "${filePath}" with ${appName}: ${formatError(error)}`,
         );
         logger.info('open failed with error:');
-        logger.info(error);
+        logger.info(formatError(error));
         if (appConfig !== undefined && typeof appConfig === 'object' && appConfig.shellCommand) {
             logger.info('failed shell command context:');
-            logger.info({
-                shellCommand: appConfig.shellCommand,
-                openCommand: appConfig.openCommand,
-            });
+            logger.info(
+                JSON.stringify(
+                    {
+                        shellCommand: appConfig.shellCommand,
+                        openCommand: appConfig.openCommand,
+                    },
+                    undefined,
+                    4,
+                ),
+            );
         }
     }
 }
