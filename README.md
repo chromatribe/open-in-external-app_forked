@@ -85,6 +85,98 @@ In VSCode, Right-clicking is different from right-clicking while holding `alt` k
 
 ![usage](https://github.com/tjx666/open-in-external-app/blob/master/images/usage.gif?raw=true)
 
+## 🇯🇵 設定HowTo（日本語）
+
+拡張機能の設定は `settings.json` の `openInExternalApp.openMapper` に書きます。  
+まずは「拡張子ごとに、どのアプリで開くか」を定義するだけで使えます。
+
+### 1) 最小構成（まずこれだけ）
+
+```jsonc
+{
+  "openInExternalApp.openMapper": [
+    {
+      "extensionName": "md",
+      "apps": "Typora"
+    }
+  ]
+}
+```
+
+- `extensionName`: 対象拡張子（例: `md`, `html`, `pdf`）
+- `apps`: 開くアプリ。コマンド名または実行ファイルパスを指定
+
+### 2) 1つの拡張子に複数アプリを設定
+
+`apps` を配列にすると、`Open in Multiple External Apps` で複数選択できます。
+
+```jsonc
+{
+  "openInExternalApp.openMapper": [
+    {
+      "extensionName": "html",
+      "apps": [
+        {
+          "title": "Chrome",
+          "openCommand": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        },
+        {
+          "title": "Firefox",
+          "openCommand": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+          "args": ["-private-window"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 3) どの拡張子でも共通で開く（共通設定）
+
+`extensionName: "__ALL__"` を使うと、全ファイルに共通の処理を追加できます。
+
+```jsonc
+{
+  "openInExternalApp.openMapper": [
+    {
+      "extensionName": "__ALL__",
+      "apps": "MacVim"
+    }
+  ]
+}
+```
+
+### 4) shellCommand を使う場合の注意
+
+`shellCommand` では `${file}` などの変数が使えます。
+
+```jsonc
+{
+  "openInExternalApp.openMapper": [
+    {
+      "extensionName": "ts",
+      "apps": [
+        {
+          "title": "Run TS",
+          "shellCommand": "ts-node ${file}"
+        }
+      ]
+    }
+  ]
+}
+```
+
+- `shellCommand` は**信頼されていないワークスペースでは実行されません**
+- その場合はワークスペースを Trusted にしてから実行してください
+
+### 5) よくあるハマりどころ
+
+- `title` は同じ `apps` 配列内で重複不可
+- Electronアプリを開くときは `isElectronApp: true` が必要な場合あり
+- WSL環境でWSLアプリを開く場合は `wslConvertWindowsPath: false` を設定
+
+この README は Marketplace の拡張機能ページにも表示されるため、上の手順をそのまま参照して設定できます。
+
 ## :loudspeaker: Limits
 
 This extension use two ways to open file in external applications.
