@@ -175,6 +175,27 @@ In VSCode, Right-clicking is different from right-clicking while holding `alt` k
 - Electronアプリを開くときは `isElectronApp: true` が必要な場合あり
 - WSL環境でWSLアプリを開く場合は `wslConvertWindowsPath: false` を設定
 
+### 6) ファイルを開いたときに自動で外部アプリを起動したい
+
+各拡張子設定で `autoOpenOnFileOpen: true` を指定すると、VS Code でそのファイルを開いたタイミングで外部アプリも起動します。
+
+```jsonc
+{
+  "openInExternalApp.openMapper": [
+    {
+      "extensionName": "md",
+      "autoOpenOnFileOpen": true,
+      "apps": [
+        {
+          "title": "mdmd",
+          "openCommand": "/Applications/mdmd.app"
+        }
+      ]
+    }
+  ]
+}
+```
+
 この README は Marketplace の拡張機能ページにも表示されるため、上の手順をそのまま参照して設定できます。
 
 ## :loudspeaker: Limits

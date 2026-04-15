@@ -9,6 +9,7 @@
 
     "cfg.openInExternalApp.openMapper": "Сопоставление расширений файлов с приложениями, в которых те будут открываться",
     "cfg.openInExternalApp.openMapper.item.id": "Установите значение из конфигурации горячей клавиши arg(configItemId) для быстрого вызова этой конфигурации",
+    "cfg.openInExternalApp.openMapper.item.autoOpenOnFileOpen": "Автоматически открывать подходящие файлы во внешнем приложении при открытии файла в VS Code",
     "cfg.openInExternalApp.openMapper.item.extensionName.string": "Расширение файла, например: md",
     "cfg.openInExternalApp.openMapper.item.extensionName.array": "Массив строк позволяет задать несколько расширений одновременно",
     "cfg.openInExternalApp.openMapper.item.apps": "Внешнее приложение для открытия файла",

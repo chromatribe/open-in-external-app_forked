@@ -8,6 +8,7 @@ export function validateConfiguration(configuration: ExtensionConfigItem[]): joi
     const configScheme = joi.array().items(
         joi.object({
             id: joi.string(),
+            autoOpenOnFileOpen: joi.boolean(),
             extensionName: joi
                 .alternatives()
                 .try(joi.string(), joi.array().items(joi.string()))

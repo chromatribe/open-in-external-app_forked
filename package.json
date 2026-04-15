@@ -139,6 +139,11 @@
                                 "type": "string",
                                 "description": "%cfg.openInExternalApp.openMapper.item.id%"
                             },
+                            "autoOpenOnFileOpen": {
+                                "type": "boolean",
+                                "default": false,
+                                "description": "%cfg.openInExternalApp.openMapper.item.autoOpenOnFileOpen%"
+                            },
                             "extensionName": {
                                 "anyOf": [
                                     {

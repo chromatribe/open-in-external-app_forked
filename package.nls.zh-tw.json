@@ -9,6 +9,7 @@
 
     "cfg.openInExternalApp.openMapper": "副檔名和用於開啟的應用程式之對應關係",
     "cfg.openInExternalApp.openMapper.item.id": "結合快捷鍵識別碼 configItemId 可以為特定的選項設定快捷鍵",
+    "cfg.openInExternalApp.openMapper.item.autoOpenOnFileOpen": "在 VS Code 開啟檔案時，自動以外部應用程式開啟符合條件的檔案",
     "cfg.openInExternalApp.openMapper.item.extensionName.string": "副檔名，例如：md",
     "cfg.openInExternalApp.openMapper.item.extensionName.array": "輸入字串陣列可以對應多個副檔名",
     "cfg.openInExternalApp.openMapper.item.apps": "用於開啟檔案的應用程式",

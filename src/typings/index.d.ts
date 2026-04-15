@@ -31,4 +31,5 @@ interface ExtensionConfigItem {
     id: string;
     extensionName: string | string[];
     apps: ExternalAppConfig[] | string;
+    autoOpenOnFileOpen?: boolean;
 }
