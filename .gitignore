@@ -2,6 +2,8 @@ out
 node_modules
 .vscode-test/
 *.vsix
+.DS_Store
+**/.DS_Store
 
 # esbuild-visualizer
 meta.json
